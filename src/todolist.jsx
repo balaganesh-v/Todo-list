@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import './index.css';
 
 function TodoList() {
 
-  const [tasks, setTasks] = useState([ "Woke up early","Walk with a dog","Daily run in the morning"]);
+  const [tasks, setTasks] = useState(["Woke up early", "Walk with a dog", "Daily run in the morning"]);
   const [newTask, setNewTask] = useState("");
 
-  // ✅ Small helper function for input change
   function handleTaskInput(event) {
     setNewTask(event.target.value);
   }
@@ -43,19 +43,23 @@ function TodoList() {
     <div className="todo-list-app">
       <h2>ToDo List</h2>
 
-      {/* Input with helper function */}
-      <input type="text" placeholder="Enter a task"
-        value={newTask} onChange={handleTaskInput} />
+      {/* Input Section */}
+      <div className="input-section">
+        <input type="text" placeholder="Enter a task"
+          value={newTask} onChange={handleTaskInput} />
+        <button className="add-btn" onClick={addNewTask}>➕ Add</button>
+      </div>
 
-      <button onClick={addNewTask}>➕ Add</button>
-
+      {/* Task List */}
       <ul>
         {tasks.map((task, index) => (
           <li key={index}>
-            {task}
-            <button onClick={() => removeTask(index)}>🗑️</button>
-            <button onClick={() => moveTaskIntoUp(index)}>👆</button>
-            <button onClick={() => moveTaskIntoDown(index)}>👇</button>
+            <span className="todo-task">{task}</span>
+            <div className="action-buttons">
+              <button className="delete-btn" onClick={() => removeTask(index)}>🗑️</button>
+              <button className="up-btn" onClick={() => moveTaskIntoUp(index)}>👆</button>
+              <button className="down-btn" onClick={() => moveTaskIntoDown(index)}>👇</button>
+            </div>
           </li>
         ))}
       </ul>
