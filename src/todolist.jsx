@@ -50,7 +50,7 @@ function TodoList() {
         <button className="add-btn" onClick={addNewTask}>➕ Add</button>
       </div>
 
-      {/* Task List on separate line */}
+      {/* Task List */}
       <ul>
         {tasks.map((task, index) => (
           <li key={index}>
