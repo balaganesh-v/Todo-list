@@ -1,9 +1,20 @@
 from sqlalchemy import create_engine     # Helps us connect to the MySQL database and run SQL commands
 from sqlalchemy.ext.declarative import declarative_base   # Needed for creating or using excisting database tables using Python classes
 from sqlalchemy.orm import sessionmaker  # Creates sessions so we can talk to the database
+from dotenv import load_dotenv
+import os
 
-# MySQL connection details (username, password, host, database name)
-DATABASE_URL = "mysql+pymysql://root:root@localhost:3306/todo_db"
+# Load environment variables from .env file
+load_dotenv()
+
+# Read database credentials from environment
+DB_USER = os.getenv("USERNAME")
+DB_PASSWORD = os.getenv("PASSWORD")
+DB_HOST = os.getenv("HOST")
+DB_NAME = os.getenv("DATABASE_NAME")
+
+# Build the database URL dynamically
+DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:3306/{DB_NAME}"
 
 # The engine is the main connection to the database
 engine = create_engine(DATABASE_URL)
