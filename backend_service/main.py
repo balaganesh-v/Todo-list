@@ -43,3 +43,13 @@ app.add_middleware(
 # Add all routes from todo_controllers under the /todos prefix
 # Example: /todos/add, /todos/update, /todos/delete, etc.
 app.include_router(router, prefix="/todos", tags=["todos"])
+
+
+from fastapi.staticfiles import StaticFiles
+import os
+
+# Path to the React build folder
+frontend_build_path = os.path.join(os.path.dirname(__file__), "../frontend_service/dist")
+
+# Serve the React frontend at /
+app.mount("/", StaticFiles(directory=frontend_build_path, html=True), name="frontend")
