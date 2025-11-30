@@ -7,14 +7,8 @@ import os
 # Load environment variables from .env file
 load_dotenv()
 
-# Read database credentials from environment
-DB_USER = os.getenv("USERNAME")
-DB_PASSWORD = os.getenv("PASSWORD")
-DB_HOST = os.getenv("HOST")
-DB_NAME = os.getenv("DATABASE_NAME")
-
-# Build the database URL dynamically
-DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:3306/{DB_NAME}"
+# Get DATABASE_URL from .env
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 # The engine is the main connection to the database
 engine = create_engine(DATABASE_URL)
